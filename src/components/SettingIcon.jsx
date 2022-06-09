@@ -1,9 +1,12 @@
 import { IoMdSettings } from "react-icons/io";
+import { Link } from "react-router-dom";
 
 const SettingIcon = () => {
   return (
     <>
-      <IoMdSettings />
+      <Link to="/settings">
+        <IoMdSettings />
+      </Link>
     </>
   );
 };

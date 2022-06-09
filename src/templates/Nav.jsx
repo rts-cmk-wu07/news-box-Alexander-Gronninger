@@ -1,18 +1,23 @@
-import ArchieveIcon from "../components/ArchiveIcon";
+import ArchiveIcon from "../components/ArchiveIcon";
 import ArrowIcon from "../components/ArrowIcon";
 import SettingIcon from "../components/SettingIcon";
+import { useLocation } from "react-router-dom";
 
 const pageTitle = "";
 
 const Nav = () => {
+  let pageURL = useLocation().pathname;
   return (
     <>
       <header>
         <nav>
-          <ArrowIcon />
-          <ArchieveIcon />
-          <h1>{pageTitle}</h1>
-          <SettingIcon />
+          {(useLocation().pathname === "/" && <ArchiveIcon />) || <ArrowIcon />}
+          <h1>
+            {(pageURL === "/" && "Newsbox") ||
+              (pageURL === "/Archive" && "Archive") ||
+              (pageURL === "/settings" && "Settings")}
+          </h1>
+          {useLocation().pathname !== "/settings" && <SettingIcon />}
         </nav>
       </header>
     </>
