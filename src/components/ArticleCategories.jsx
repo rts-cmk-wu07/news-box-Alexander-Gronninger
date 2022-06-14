@@ -24,8 +24,10 @@ const ArticleCategories = (props) => {
         }
       }
       & h2 {
-        margin: 0 auto 0 5px;
-        line-height: 24px;
+        margin: 0 auto 0 15px;
+        font-size: 18px;
+        line-height: 18px;
+        text-transform: uppercase;
       }
       & svg {
         height: 24px;
