@@ -1,14 +1,14 @@
 import { GrInbox } from "react-icons/gr";
 import { Link } from "react-router-dom";
 
-const ArchieveIcon = () => {
+const ArchiveIcon = () => {
   return (
     <>
-      <Link to="/archieve">
+      <Link to="/archive">
         <GrInbox />
       </Link>
     </>
   );
 };
 
-export default ArchieveIcon;
+export default ArchiveIcon;

@@ -5,8 +5,6 @@ import { useLocation } from "react-router-dom";
 /** @jsxImportSource @emotion/react */
 import { css } from "@emotion/react";
 
-const pageTitle = "";
-
 const Nav = () => {
   const styles = {
     nav: css`
@@ -19,6 +17,9 @@ const Nav = () => {
         height: 24px;
         width: auto;
       }
+      & div {
+        width: 24px;
+      }
     `,
   };
   let pageURL = useLocation().pathname;
@@ -29,10 +30,12 @@ const Nav = () => {
           {(useLocation().pathname === "/" && <ArchiveIcon />) || <ArrowIcon />}
           <h1>
             {(pageURL === "/" && "Newsbox") ||
-              (pageURL === "/Archive" && "Archive") ||
+              (pageURL === "/archive" && "Archive") ||
               (pageURL === "/settings" && "Settings")}
           </h1>
-          {useLocation().pathname !== "/settings" && <SettingIcon />}
+          {(useLocation().pathname !== "/settings" && <SettingIcon />) || (
+            <div></div>
+          )}
         </nav>
       </header>
     </>
