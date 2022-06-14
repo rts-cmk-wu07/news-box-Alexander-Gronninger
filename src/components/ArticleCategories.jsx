@@ -2,6 +2,10 @@ import { IoIosArrowBack } from "react-icons/io";
 import { BiCategory } from "react-icons/bi";
 /** @jsxImportSource @emotion/react */
 import { css } from "@emotion/react";
+import useFetch from "../hooks/useFetch";
+import Article from "../components/Article";
+
+import placeholderImage from "../images/placeholder.jpg";
 
 const ArticleCategories = (props) => {
   const styles = {
@@ -36,14 +40,40 @@ const ArticleCategories = (props) => {
       }
     `,
   };
+
+  const API_URL =
+    "http://api.nytimes.com/svc/topstories/v2/" +
+    props.category +
+    ".json?api-key=c50OfFb2PQdT2nTvRhfqbEWJwLAiRH8N";
+
+  const { data, isPending, error } = useFetch(API_URL);
+
   return (
-    <section css={styles.category}>
-      <div>
-        <BiCategory />
-      </div>
-      <h2>{props.category}</h2>
-      <IoIosArrowBack />
-    </section>
+    <>
+      <section css={styles.category}>
+        <div>
+          <BiCategory />
+        </div>
+        <h2>{props.category}</h2>
+        <IoIosArrowBack />
+      </section>
+      {data &&
+        data.results.map((result) => {
+          return (
+            <Article
+              image={
+                (result.multimedia && result.multimedia[0].url) ||
+                placeholderImage
+              }
+              title={(result.title && result.title) || "no title available"}
+              paragraph={
+                (result.abstract && result.abstract) || "no paragraph available"
+              }
+              link={result.url && result.url}
+            />
+          );
+        })}
+    </>
   );
 };
 
