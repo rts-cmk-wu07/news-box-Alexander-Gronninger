@@ -51,29 +51,32 @@ const ArticleCategories = (props) => {
 
   return (
     <>
-      <section css={styles.category}>
-        <div>
-          <BiCategory />
-        </div>
-        <h2>{props.category}</h2>
-        <IoIosArrowBack />
+      <section>
+        <section css={styles.category}>
+          <div>
+            <BiCategory />
+          </div>
+          <h2>{props.category}</h2>
+          <IoIosArrowBack />
+        </section>
+        {data &&
+          data.results.map((result) => {
+            return (
+              <Article
+                image={
+                  (result.multimedia && result.multimedia[0].url) ||
+                  placeholderImage
+                }
+                title={(result.title && result.title) || "no title available"}
+                paragraph={
+                  (result.abstract && result.abstract) ||
+                  "no paragraph available"
+                }
+                link={result.url && result.url}
+              />
+            );
+          })}
       </section>
-      {data &&
-        data.results.map((result) => {
-          return (
-            <Article
-              image={
-                (result.multimedia && result.multimedia[0].url) ||
-                placeholderImage
-              }
-              title={(result.title && result.title) || "no title available"}
-              paragraph={
-                (result.abstract && result.abstract) || "no paragraph available"
-              }
-              link={result.url && result.url}
-            />
-          );
-        })}
     </>
   );
 };
