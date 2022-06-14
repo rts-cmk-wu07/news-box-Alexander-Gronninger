@@ -37,6 +37,7 @@ const ArticleCategories = (props) => {
         height: 24px;
         width: auto;
         margin: 0 15px 0 0;
+        transform: rotate(-90deg);
       }
     `,
   };

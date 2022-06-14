@@ -13,6 +13,7 @@ const Nav = () => {
       align-items: center;
       padding: 0 20px;
       border-bottom: 1px solid lightgray;
+      height: 65px;
       & svg {
         height: 24px;
         width: auto;
