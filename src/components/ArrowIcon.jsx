@@ -5,7 +5,6 @@ const ArrowIcon = () => {
   const navigate = useNavigate();
   const navigateBack = () => {
     navigate(-1);
-    console.log("test");
   };
   return (
     <>
