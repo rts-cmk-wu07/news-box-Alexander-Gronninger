@@ -1,4 +1,5 @@
 import Article from "../components/Article";
+import ArticleCategories from "../components/ArticleCategories";
 import useFetch from "../hooks/useFetch";
 
 import placeholderImage from "../images/placeholder.jpg";
@@ -16,6 +17,9 @@ const Home = () => {
   return (
     <>
       <main>
+        {articleCategory.map((articleCategory) => {
+          return <ArticleCategories category={articleCategory} />;
+        })}
         {data &&
           data.results.map((result) => {
             console.log(result);
