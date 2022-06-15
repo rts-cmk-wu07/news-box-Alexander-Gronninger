@@ -5,12 +5,11 @@ import { css } from "@emotion/react";
 import useFetch from "../hooks/useFetch";
 import Article from "../components/Article";
 import { useState } from "react";
+import Collapsible from "react-collapsible";
 
 import placeholderImage from "../images/placeholder.jpg";
 
 const ArticleCategories = (props) => {
-  const [categoryHeight, setCategoryHeight] = useState("100%");
-  const [categoryScaleY, setCategoryScaleY] = useState("scaleY(1)");
   const [arrowRotate, setArrowRotate] = useState("rotate(-90deg)");
 
   const styles = {
@@ -47,13 +46,6 @@ const ArticleCategories = (props) => {
         transition: all 0.5s;
       }
     `,
-    categoryListContainer: css`
-      transition: all 1s;
-      height: ${categoryHeight};
-      transform: ${categoryScaleY};
-      transform-origin: top;
-      overflow: hidden;
-    `,
   };
 
   const API_URL =
@@ -63,50 +55,42 @@ const ArticleCategories = (props) => {
 
   const { data, isPending, error } = useFetch(API_URL);
 
-  const showHide = (e) => {
-    if (categoryHeight === "100%") {
-      setCategoryHeight("0");
-      setCategoryScaleY("scaleY(0)");
-      setArrowRotate("rotate(-180deg)");
-    } else {
-      setCategoryHeight("100%");
-      setCategoryScaleY("scaleY(1)");
-      setArrowRotate("rotate(-90deg)");
-    }
-  };
-
   return (
-    <>
-      <section>
-        <div css={styles.category} onClick={showHide}>
+    <Collapsible
+      onOpening={() => {
+        setArrowRotate("rotate(-180deg)");
+      }}
+      onClosing={() => {
+        setArrowRotate("rotate(-90deg)");
+      }}
+      trigger={
+        <div css={styles.category}>
           <div>
             <BiCategory />
           </div>
           <h2>{props.category}</h2>
           <IoIosArrowBack />
         </div>
-        <div css={styles.categoryListContainer}>
-          {data &&
-            data.results.map((result) => {
-              return (
-                <Article
-                  key={result.title}
-                  image={
-                    (result.multimedia && result.multimedia[0].url) ||
-                    placeholderImage
-                  }
-                  title={(result.title && result.title) || "no title available"}
-                  paragraph={
-                    (result.abstract && result.abstract) ||
-                    "no paragraph available"
-                  }
-                  link={result.url && result.url}
-                />
-              );
-            })}
-        </div>
-      </section>
-    </>
+      }
+    >
+      {data &&
+        data.results.map((result) => {
+          return (
+            <Article
+              key={result.title}
+              image={
+                (result.multimedia && result.multimedia[0].url) ||
+                placeholderImage
+              }
+              title={(result.title && result.title) || "no title available"}
+              paragraph={
+                (result.abstract && result.abstract) || "no paragraph available"
+              }
+              link={result.url && result.url}
+            />
+          );
+        })}
+    </Collapsible>
   );
 };
 

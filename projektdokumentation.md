@@ -26,6 +26,7 @@
 - Emotion: to allow for css to be applied in components
 - React-icons: for various icons used on the site
 - React-router-dom: for handling navigation and different pages
+- React-collapsible: tried making collapsible categories with just css, which doesn't allow for dynamically sized elements, this does
 
 ---
 
