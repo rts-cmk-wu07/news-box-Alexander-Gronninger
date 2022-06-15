@@ -4,10 +4,15 @@ import { BiCategory } from "react-icons/bi";
 import { css } from "@emotion/react";
 import useFetch from "../hooks/useFetch";
 import Article from "../components/Article";
+import { useState } from "react";
 
 import placeholderImage from "../images/placeholder.jpg";
 
 const ArticleCategories = (props) => {
+  const [categoryHeight, setCategoryHeight] = useState("100%");
+  const [categoryScaleY, setCategoryScaleY] = useState("scaleY(1)");
+  const [arrowRotate, setArrowRotate] = useState("rotate(-90deg)");
+
   const styles = {
     category: css`
       display: flex;
@@ -25,6 +30,7 @@ const ArticleCategories = (props) => {
         box-shadow: 0px 7px 20px 5px lightgray;
         & svg {
           margin: 0;
+          transform: rotate(0deg);
         }
       }
       & h2 {
@@ -37,8 +43,16 @@ const ArticleCategories = (props) => {
         height: 24px;
         width: auto;
         margin: 0 15px 0 0;
-        transform: rotate(-90deg);
+        transform: ${arrowRotate};
+        transition: all 0.5s;
       }
+    `,
+    categoryListContainer: css`
+      transition: all 1s;
+      height: ${categoryHeight};
+      transform: ${categoryScaleY};
+      transform-origin: top;
+      overflow: hidden;
     `,
   };
 
@@ -49,33 +63,48 @@ const ArticleCategories = (props) => {
 
   const { data, isPending, error } = useFetch(API_URL);
 
+  const showHide = (e) => {
+    if (categoryHeight === "100%") {
+      setCategoryHeight("0");
+      setCategoryScaleY("scaleY(0)");
+      setArrowRotate("rotate(-180deg)");
+    } else {
+      setCategoryHeight("100%");
+      setCategoryScaleY("scaleY(1)");
+      setArrowRotate("rotate(-90deg)");
+    }
+  };
+
   return (
     <>
       <section>
-        <section css={styles.category}>
+        <div css={styles.category} onClick={showHide}>
           <div>
             <BiCategory />
           </div>
           <h2>{props.category}</h2>
           <IoIosArrowBack />
-        </section>
-        {data &&
-          data.results.map((result) => {
-            return (
-              <Article
-                image={
-                  (result.multimedia && result.multimedia[0].url) ||
-                  placeholderImage
-                }
-                title={(result.title && result.title) || "no title available"}
-                paragraph={
-                  (result.abstract && result.abstract) ||
-                  "no paragraph available"
-                }
-                link={result.url && result.url}
-              />
-            );
-          })}
+        </div>
+        <div css={styles.categoryListContainer}>
+          {data &&
+            data.results.map((result) => {
+              return (
+                <Article
+                  key={result.title}
+                  image={
+                    (result.multimedia && result.multimedia[0].url) ||
+                    placeholderImage
+                  }
+                  title={(result.title && result.title) || "no title available"}
+                  paragraph={
+                    (result.abstract && result.abstract) ||
+                    "no paragraph available"
+                  }
+                  link={result.url && result.url}
+                />
+              );
+            })}
+        </div>
       </section>
     </>
   );
