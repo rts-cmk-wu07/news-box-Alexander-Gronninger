@@ -43,7 +43,7 @@ const ArticleCategories = (props) => {
         width: auto;
         margin: 0 15px 0 0;
         transform: ${arrowRotate};
-        transition: all 0.5s;
+        transition: all 1s;
       }
     `,
   };
@@ -57,11 +57,12 @@ const ArticleCategories = (props) => {
 
   return (
     <Collapsible
+      open="True"
       onOpening={() => {
-        setArrowRotate("rotate(-180deg)");
+        setArrowRotate("rotate(-90deg)");
       }}
       onClosing={() => {
-        setArrowRotate("rotate(-90deg)");
+        setArrowRotate("rotate(-180deg)");
       }}
       trigger={
         <div css={styles.category}>
@@ -73,6 +74,9 @@ const ArticleCategories = (props) => {
         </div>
       }
     >
+      {error && <p>Couuldn't load content...</p>}
+      {error && <p>Please try again in a minute...</p>}
+      {isPending && <p>Loading...</p>}
       {data &&
         data.results.map((result) => {
           return (
