@@ -7,7 +7,12 @@ const Home = () => {
     <>
       <main>
         {articleCategory.map((articleCategory) => {
-          return <ArticleCategories category={articleCategory} />;
+          return (
+            <ArticleCategories
+              category={articleCategory}
+              key={articleCategory}
+            />
+          );
         })}
       </main>
     </>
