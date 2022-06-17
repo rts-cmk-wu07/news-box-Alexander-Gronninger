@@ -6,19 +6,21 @@ const Home = () => {
   const { categories } = useContext(CategoryContext);
 
   let categoriesKeys = [];
-
   categories.map((category) => {
     categoriesKeys.push(Object.keys(category));
   });
 
-  console.log(categories);
-  console.log(categoriesKeys);
+  let selectedCategories = [];
+  categories.map((category, i) => {
+    category[categoriesKeys[i][0]] &&
+      selectedCategories.push(Object.keys(category));
+  });
 
   return (
     <>
       <main>
-        {categoriesKeys &&
-          categoriesKeys.map((category) => {
+        {selectedCategories &&
+          selectedCategories.map((category) => {
             return <ArticleCategories category={category} key={category} />;
           })}
       </main>
