@@ -46,7 +46,7 @@ const Settings = () => {
           return (
             <div>
               <p>{category}</p>
-              <Switch />
+              <Switch key={category} />
             </div>
           );
         })}

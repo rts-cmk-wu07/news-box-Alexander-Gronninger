@@ -1,19 +1,22 @@
+import { useContext } from "react";
 import ArticleCategories from "../components/ArticleCategories";
+import CategoryContext from "../context/CategoryContext";
 
 const Home = () => {
-  let articleCategory = ["world", "health", "sports", "business", "travel"];
+  const { categories } = useContext(CategoryContext);
 
   return (
     <>
       <main>
-        {articleCategory.map((articleCategory) => {
-          return (
-            <ArticleCategories
-              category={articleCategory}
-              key={articleCategory}
-            />
-          );
-        })}
+        {categories &&
+          categories.map((category) => {
+            return (
+              <ArticleCategories
+                category={category}
+                key={"section" + category}
+              />
+            );
+          })}
       </main>
     </>
   );

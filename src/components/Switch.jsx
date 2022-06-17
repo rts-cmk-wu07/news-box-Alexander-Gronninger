@@ -53,7 +53,7 @@ const Switch = () => {
   return (
     <>
       <label css={styles.switch}>
-        <input type="checkbox" />
+        <input type="checkbox" defaultChecked />
         <span></span>
       </label>
     </>
