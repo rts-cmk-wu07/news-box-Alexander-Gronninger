@@ -1,9 +1,16 @@
 import Switch from "../components/Switch";
 /** @jsxImportSource @emotion/react */
 import { css } from "@emotion/react";
+import { useContext } from "react";
+import CategoryContext from "../context/CategoryContext";
 
 const Settings = () => {
-  let articleCategory = ["world", "health", "sports", "business", "travel"];
+  const { categories } = useContext(CategoryContext);
+
+  let categoriesKeys = [];
+  categories.map((category) => {
+    categoriesKeys.push(Object.keys(category));
+  });
 
   const styles = {
     settings: css`
@@ -42,11 +49,11 @@ const Settings = () => {
       <p>Categories</p>
 
       <section>
-        {articleCategory.map((category) => {
+        {categoriesKeys.map((category) => {
           return (
-            <div>
+            <div key={category}>
               <p>{category}</p>
-              <Switch key={category} />
+              <Switch category={category} />
             </div>
           );
         })}

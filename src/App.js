@@ -9,8 +9,15 @@ import Settings from "./pages/Settings";
 import CategoryContext from "./context/CategoryContext";
 
 function App() {
-  const categoryList = ["world", "health", "sports", "business", "travel"];
+  const categoryList = [
+    { world: true },
+    { health: true },
+    { sports: true },
+    { business: true },
+    { travel: true },
+  ];
   const [categories, setCategories] = useState(categoryList);
+  console.log(categories);
 
   return (
     <div className="App">

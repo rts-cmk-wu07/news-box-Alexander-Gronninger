@@ -1,7 +1,11 @@
 /** @jsxImportSource @emotion/react */
 import { css } from "@emotion/react";
+import { useContext } from "react";
+import CategoryContext from "../context/CategoryContext";
 
-const Switch = () => {
+const Switch = (props) => {
+  const { categories, setCategories } = useContext(CategoryContext);
+
   const styles = {
     switch: css`
       position: relative;
@@ -50,10 +54,27 @@ const Switch = () => {
       }
     `,
   };
+
+  function checkObject(obj) {
+    if (props.category == Object.keys(obj)[0]) {
+      return true;
+    }
+  }
+
+  const updateCategory = (e) => {
+    if (e.target.checked) {
+      categories[categories.findIndex(checkObject)][props.category] = true;
+    } else {
+      categories[categories.findIndex(checkObject)][props.category] = false;
+    }
+    console.log(categories);
+    setCategories(categories);
+  };
+
   return (
     <>
       <label css={styles.switch}>
-        <input type="checkbox" defaultChecked />
+        <input type="checkbox" defaultChecked onClick={updateCategory} />
         <span></span>
       </label>
     </>
