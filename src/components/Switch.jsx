@@ -75,7 +75,9 @@ const Switch = (props) => {
   return (
     <>
       <label css={styles.switch}>
-        <input type="checkbox" defaultChecked onClick={updateCategory} />
+        {(props.checked && (
+          <input type="checkbox" defaultChecked onClick={updateCategory} />
+        )) || <input type="checkbox" onClick={updateCategory} />}
         <span></span>
       </label>
     </>

@@ -8,6 +8,8 @@ import Archive from "./pages/Archive";
 import Settings from "./pages/Settings";
 import CategoryContext from "./context/CategoryContext";
 import ThemeContext from "./context/ThemeContext";
+/** @jsxImportSource @emotion/react */
+import { css } from "@emotion/react";
 
 function App() {
   const categoryList = [
@@ -18,7 +20,7 @@ function App() {
     { travel: true },
   ];
 
-  const lightMode = {
+  const lightTheme = {
     primaryColor: "#87BCBF",
     secondaryColor: "#D97D54",
     tertiaryColor: "#324755",
@@ -31,7 +33,7 @@ function App() {
     tertiaryBackgroundColor: "#B9B0A2",
   };
 
-  const darkMode = {
+  const darkTheme = {
     primaryColor: "#bf8a87",
     secondaryColor: "#54b0d9",
     tertiaryColor: "#554032",
@@ -40,17 +42,25 @@ function App() {
     secondaryTextColor: "#6E8CA0",
     tertiaryTextColor: "black",
     primaryBackgroundColor: "#1B1c20",
-    secondaryBackgroundColor: "C8D1D3",
+    secondaryBackgroundColor: "#323131",
     tertiaryBackgroundColor: "#a2abb9",
   };
 
   const [categories, setCategories] = useState(categoryList);
-  const [theme, setTheme] = useState(lightMode);
+  const [theme, setTheme] = useState(darkTheme);
+
+  const styles = {
+    app: css`
+      background-color: ${theme.primaryBackgroundColor};
+    `,
+  };
 
   return (
-    <div className="App">
+    <div className="App" css={styles.app}>
       <CategoryContext.Provider value={{ categories, setCategories }}>
-        <ThemeContext.Provider value={{ theme, setTheme }}>
+        <ThemeContext.Provider
+          value={{ theme, lightTheme, darkTheme, setTheme }}
+        >
           <Nav />
           <Routes>
             <Route path="/" element={<Home />} />

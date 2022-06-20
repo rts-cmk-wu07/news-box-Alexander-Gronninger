@@ -3,9 +3,13 @@ import Switch from "../components/Switch";
 import { css } from "@emotion/react";
 import { useContext } from "react";
 import CategoryContext from "../context/CategoryContext";
+import ThemeContext from "../context/ThemeContext";
 
 const Settings = () => {
+  const { theme, setTheme } = useContext(ThemeContext);
   const { categories } = useContext(CategoryContext);
+  let categorySettings =
+    JSON.parse(localStorage.getItem("categorySettings")) || false;
 
   let categoriesKeys = [];
   categories.map((category) => {
@@ -14,15 +18,17 @@ const Settings = () => {
 
   const styles = {
     settings: css`
-      background-color: lightgray;
+      background-color: ${theme.primaryBackgroundColor};
       & h2 {
         padding-top: 40px;
+        color: ${theme.primaryTextColor};
       }
       & p {
         margin-bottom: 40px;
+        color: ${theme.primaryTextColor};
       }
       & section {
-        background-color: white;
+        background-color: ${theme.secondaryBackgroundColor};
         max-width: 70%;
         border-radius: 10px;
         & div {
@@ -34,9 +40,11 @@ const Settings = () => {
             margin: 0;
             line-height: 34px;
             text-transform: capitalize;
+            color: ${theme.primaryTextColor};
           }
           & label {
             margin: 0 0 0 auto;
+            color: ${theme.primaryTextColor};
           }
         }
       }
@@ -49,11 +57,14 @@ const Settings = () => {
       <p>Categories</p>
 
       <section>
-        {categoriesKeys.map((category) => {
+        {categoriesKeys.map((category, i) => {
           return (
             <div key={category}>
               <p>{category}</p>
-              <Switch category={category} />
+              <Switch
+                category={category}
+                checked={(categorySettings[i][category] && true) || false}
+              />
             </div>
           );
         })}

@@ -17,16 +17,19 @@ const Nav = () => {
       padding: 0 20px;
       border-bottom: 1px solid lightgray;
       height: 65px;
+      background-color: ${theme.primaryBackgroundColor};
       & svg {
         height: 24px;
         width: auto;
         color: ${theme.primaryTextColor};
+        background-color: ${theme.primaryBackgroundColor};
       }
       & div {
         width: 24px;
       }
       & h1 {
         color: ${theme.primaryTextColor};
+        background-color: ${theme.primaryBackgroundColor};
       }
     `,
   };

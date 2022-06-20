@@ -21,6 +21,7 @@ const ArticleCategories = (props) => {
       align-items: center;
       height: 60px;
       border-bottom: 1px solid lightgray;
+      background-color: ${theme.primaryBackgroundColor};
       & div {
         margin: 0 0 0 10px;
         border-radius: 50%;
@@ -29,11 +30,13 @@ const ArticleCategories = (props) => {
         display: flex;
         align-items: center;
         justify-content: center;
-        box-shadow: 0px 7px 20px 5px lightgray;
+        box-shadow: 0px 7px 20px 5px ${theme.secondaryBackgroundColor};
+        background-color: ${theme.primaryBackgroundColor};
         & svg {
           margin: 0;
           transform: rotate(0deg);
           color: ${theme.primaryTextColor};
+          background-color: ${theme.primaryBackgroundColor};
         }
       }
       & h2 {
@@ -42,6 +45,7 @@ const ArticleCategories = (props) => {
         line-height: 18px;
         text-transform: uppercase;
         color: ${theme.primaryTextColor};
+        background-color: ${theme.primaryBackgroundColor};
       }
       & svg {
         height: 24px;
@@ -50,7 +54,11 @@ const ArticleCategories = (props) => {
         transform: ${arrowRotate};
         transition: all 1s;
         color: ${theme.primaryTextColor};
+        background-color: ${theme.primaryBackgroundColor};
       }
+    `,
+    errors: css`
+      color: ${theme.primaryTextColor};
     `,
   };
 
@@ -80,9 +88,9 @@ const ArticleCategories = (props) => {
         </div>
       }
     >
-      {error && <p>Couuldn't load content...</p>}
-      {error && <p>Please try again in a minute...</p>}
-      {isPending && <p>Loading...</p>}
+      {error && <p css={styles.error}>Couuldn't load content...</p>}
+      {error && <p css={styles.error}>Please try again in a minute...</p>}
+      {isPending && <p css={styles.error}>Loading...</p>}
       {data &&
         data.results.map((result) => {
           return (
