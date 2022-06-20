@@ -1,3 +1,5 @@
+import { useContext } from "react";
+import ThemeContext from "../context/ThemeContext";
 import { GrInbox } from "react-icons/gr";
 import { Link } from "react-router-dom";
 

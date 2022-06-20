@@ -1,3 +1,5 @@
+import { useContext } from "react";
+import ThemeContext from "../context/ThemeContext";
 import { IoIosArrowBack } from "react-icons/io";
 import { BiCategory } from "react-icons/bi";
 /** @jsxImportSource @emotion/react */
@@ -10,6 +12,7 @@ import Collapsible from "react-collapsible";
 import placeholderImage from "../images/placeholder.jpg";
 
 const ArticleCategories = (props) => {
+  const { theme, setTheme } = useContext(ThemeContext);
   const [arrowRotate, setArrowRotate] = useState("rotate(-90deg)");
 
   const styles = {
@@ -30,6 +33,7 @@ const ArticleCategories = (props) => {
         & svg {
           margin: 0;
           transform: rotate(0deg);
+          color: ${theme.primaryTextColor};
         }
       }
       & h2 {
@@ -37,6 +41,7 @@ const ArticleCategories = (props) => {
         font-size: 18px;
         line-height: 18px;
         text-transform: uppercase;
+        color: ${theme.primaryTextColor};
       }
       & svg {
         height: 24px;
@@ -44,6 +49,7 @@ const ArticleCategories = (props) => {
         margin: 0 15px 0 0;
         transform: ${arrowRotate};
         transition: all 1s;
+        color: ${theme.primaryTextColor};
       }
     `,
   };
@@ -80,18 +86,23 @@ const ArticleCategories = (props) => {
       {data &&
         data.results.map((result) => {
           return (
-            <Article
-              key={result.title}
-              image={
-                (result.multimedia && result.multimedia[0].url) ||
-                placeholderImage
-              }
-              title={(result.title && result.title) || "no title available"}
-              paragraph={
-                (result.abstract && result.abstract) || "no paragraph available"
-              }
-              link={result.url && result.url}
-            />
+            <>
+              {result.multimedia && result.title && result.abstract && (
+                <Article
+                  key={result.title}
+                  image={
+                    (result.multimedia && result.multimedia[0].url) ||
+                    placeholderImage
+                  }
+                  title={(result.title && result.title) || "no title available"}
+                  paragraph={
+                    (result.abstract && result.abstract) ||
+                    "no paragraph available"
+                  }
+                  link={result.url && result.url}
+                />
+              )}
+            </>
           );
         })}
     </Collapsible>

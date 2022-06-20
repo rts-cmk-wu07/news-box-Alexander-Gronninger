@@ -4,8 +4,11 @@ import SettingIcon from "../components/SettingIcon";
 import { useLocation } from "react-router-dom";
 /** @jsxImportSource @emotion/react */
 import { css } from "@emotion/react";
+import { useContext } from "react";
+import ThemeContext from "../context/ThemeContext";
 
 const Nav = () => {
+  const { theme, setTheme } = useContext(ThemeContext);
   const styles = {
     nav: css`
       display: flex;
@@ -17,9 +20,13 @@ const Nav = () => {
       & svg {
         height: 24px;
         width: auto;
+        color: ${theme.primaryTextColor};
       }
       & div {
         width: 24px;
+      }
+      & h1 {
+        color: ${theme.primaryTextColor};
       }
     `,
   };

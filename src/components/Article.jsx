@@ -1,7 +1,11 @@
+import { useContext } from "react";
+import ThemeContext from "../context/ThemeContext";
 /** @jsxImportSource @emotion/react */
 import { css } from "@emotion/react";
 
 const Article = (props) => {
+  const { theme, setTheme } = useContext(ThemeContext);
+
   const styles = {
     article: css`
       text-decoration: none;
@@ -27,6 +31,7 @@ const Article = (props) => {
           white-space: nowrap;
           overflow: hidden;
           text-overflow: ellipsis;
+          color: ${theme.primaryTextColor};
         }
         & p {
           grid-column: 2 / 3;
@@ -41,10 +46,15 @@ const Article = (props) => {
           max-height: 32px;
           -webkit-line-clamp: 2;
           -webkit-box-orient: vertical;
+          color: ${theme.primaryTextColor};
+        }
+        & a {
+          color: ${theme.primaryTextColor};
         }
       }
     `,
   };
+
   return (
     <a href={props.link} css={styles.article}>
       <article>

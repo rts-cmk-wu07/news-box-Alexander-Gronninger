@@ -12,3 +12,5 @@ const themeContext = createContext({
   fossil: "C8D1D3",
   sand: "#B9B0A2",
 });
+
+export default themeContext;

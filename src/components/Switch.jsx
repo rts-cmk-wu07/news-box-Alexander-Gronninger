@@ -1,9 +1,10 @@
-/** @jsxImportSource @emotion/react */
-import { css } from "@emotion/react";
 import { useContext } from "react";
+import ThemeContext from "../context/ThemeContext"; /** @jsxImportSource @emotion/react */
+import { css } from "@emotion/react";
 import CategoryContext from "../context/CategoryContext";
 
 const Switch = (props) => {
+  const { theme, setTheme } = useContext(ThemeContext);
   const { categories, setCategories } = useContext(CategoryContext);
 
   const styles = {

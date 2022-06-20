@@ -6,8 +6,6 @@ const Home = () => {
   const { categories, setCategories } = useContext(CategoryContext);
   let categorySettings =
     JSON.parse(localStorage.getItem("categorySettings")) || false;
-  console.log(categorySettings);
-  //categorySettings && setCategories(categorySettings);
 
   useEffect(() => {
     categorySettings && setCategories(categorySettings);
