@@ -67,8 +67,8 @@ const Switch = (props) => {
     } else {
       categories[categories.findIndex(checkObject)][props.category] = false;
     }
-    console.log(categories);
     setCategories(categories);
+    localStorage.setItem("categorySettings", JSON.stringify(categories));
   };
 
   return (

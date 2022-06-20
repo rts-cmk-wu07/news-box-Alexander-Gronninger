@@ -3,7 +3,15 @@ import ArticleCategories from "../components/ArticleCategories";
 import CategoryContext from "../context/CategoryContext";
 
 const Home = () => {
-  const { categories } = useContext(CategoryContext);
+  const { categories, setCategories } = useContext(CategoryContext);
+  let categorySettings =
+    JSON.parse(localStorage.getItem("categorySettings")) || false;
+  console.log(categorySettings);
+  //categorySettings && setCategories(categorySettings);
+
+  useEffect(() => {
+    categorySettings && setCategories(categorySettings);
+  }, []);
 
   let categoriesKeys = [];
   categories.map((category) => {
