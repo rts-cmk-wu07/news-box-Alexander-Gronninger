@@ -4,12 +4,6 @@ import CategoryContext from "../context/CategoryContext";
 
 const Home = () => {
   const { categories, setCategories } = useContext(CategoryContext);
-  let categorySettings =
-    JSON.parse(localStorage.getItem("categorySettings")) || false;
-
-  useEffect(() => {
-    categorySettings && setCategories(categorySettings);
-  }, []);
 
   let categoriesKeys = [];
   categories.map((category) => {

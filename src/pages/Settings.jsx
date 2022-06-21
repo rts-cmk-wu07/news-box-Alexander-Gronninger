@@ -72,7 +72,10 @@ const Settings = () => {
               <p>{category}</p>
               <Switch
                 category={category}
-                checked={(categorySettings[i][category] && true) || false}
+                checked={
+                  (categorySettings && categorySettings[i][category] && true) ||
+                  false
+                }
               />
             </div>
           );

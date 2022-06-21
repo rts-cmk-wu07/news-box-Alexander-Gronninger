@@ -56,6 +56,13 @@ function App() {
     savedTheme && setTheme(savedTheme);
   }, []);
 
+  let categorySettings =
+    JSON.parse(localStorage.getItem("categorySettings")) || false;
+
+  useEffect(() => {
+    categorySettings && setCategories(categorySettings);
+  }, []);
+
   const styles = {
     app: css`
       background-color: ${theme.primaryBackgroundColor};
