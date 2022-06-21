@@ -1,16 +1,24 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import ThemeContext from "../context/ThemeContext";
 /** @jsxImportSource @emotion/react */
 import { css } from "@emotion/react";
 import { GrInbox } from "react-icons/gr";
+import { useSwipeable } from "react-swipeable";
 
 const Article = (props) => {
   const { theme, setTheme } = useContext(ThemeContext);
+  const [swipe, setSwipe] = useState("0");
+  const [transition, setTransition] = useState("all 0s");
 
   const styles = {
     container: css`
       display: flex;
       flex-direction: row;
+      overflow: hidden;
+      width: 125%;
+      position: relative;
+      left: ${swipe};
+      transition: ${transition};
     `,
     article: css`
       text-decoration: none;
@@ -60,7 +68,7 @@ const Article = (props) => {
       }
     `,
     button: css`
-      width: 90px;
+      width: 25%;
       height: 90px;
       background-color: ${theme.primaryColor};
       display: flex;
@@ -69,8 +77,26 @@ const Article = (props) => {
     `,
   };
 
+  const handlers = useSwipeable({
+    delta: 10,
+    swipeDuration: 50000,
+    onSwiping: (e) => {
+      setTransition("all 0s");
+      if (e.deltaX > 0) {
+      } else if (e.deltaX > -100) {
+        setSwipe(e.deltaX + "px");
+      } else {
+        console.log("add archiving");
+      }
+    },
+    onSwiped: (e) => {
+      setSwipe("0px");
+      setTransition("all 1s");
+    },
+  });
+
   return (
-    <div css={styles.container}>
+    <div css={styles.container} {...handlers}>
       <a href={props.link} css={styles.article}>
         <article>
           <img src={props.image} alt={props.imageName} />
