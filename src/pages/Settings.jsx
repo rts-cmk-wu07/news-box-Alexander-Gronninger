@@ -7,7 +7,7 @@ import ThemeContext from "../context/ThemeContext";
 import DarkLightSwitch from "../components/DarkLightSwitch";
 
 const Settings = () => {
-  const { theme, setTheme } = useContext(ThemeContext);
+  const { theme } = useContext(ThemeContext);
   const { categories } = useContext(CategoryContext);
   let categorySettings =
     JSON.parse(localStorage.getItem("categorySettings")) || false;

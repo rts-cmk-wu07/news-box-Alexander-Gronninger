@@ -2,13 +2,19 @@ import { useContext } from "react";
 import ThemeContext from "../context/ThemeContext";
 /** @jsxImportSource @emotion/react */
 import { css } from "@emotion/react";
+import { GrInbox } from "react-icons/gr";
 
 const Article = (props) => {
   const { theme, setTheme } = useContext(ThemeContext);
 
   const styles = {
+    container: css`
+      display: flex;
+      flex-direction: row;
+    `,
     article: css`
       text-decoration: none;
+      width: 100%;
       & article {
         display: grid;
         padding: 15px 25px;
@@ -53,16 +59,29 @@ const Article = (props) => {
         }
       }
     `,
+    button: css`
+      width: 90px;
+      height: 90px;
+      background-color: ${theme.primaryColor};
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    `,
   };
 
   return (
-    <a href={props.link} css={styles.article}>
-      <article>
-        <img src={props.image} alt={props.imageName} />
-        <h2>{props.title}</h2>
-        <p>{props.paragraph}</p>
-      </article>
-    </a>
+    <div css={styles.container}>
+      <a href={props.link} css={styles.article}>
+        <article>
+          <img src={props.image} alt={props.imageName} />
+          <h2>{props.title}</h2>
+          <p>{props.paragraph}</p>
+        </article>
+      </a>
+      <div css={styles.button}>
+        <GrInbox />
+      </div>
+    </div>
   );
 };
 

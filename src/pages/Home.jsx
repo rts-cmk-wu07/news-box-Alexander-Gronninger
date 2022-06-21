@@ -1,9 +1,9 @@
-import { useContext, useEffect } from "react";
+import { useContext } from "react";
 import ArticleCategories from "../components/ArticleCategories";
 import CategoryContext from "../context/CategoryContext";
 
 const Home = () => {
-  const { categories, setCategories } = useContext(CategoryContext);
+  const { categories } = useContext(CategoryContext);
 
   let categoriesKeys = [];
   categories.map((category) => {

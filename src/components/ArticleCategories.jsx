@@ -12,7 +12,7 @@ import Collapsible from "react-collapsible";
 import placeholderImage from "../images/placeholder.jpg";
 
 const ArticleCategories = (props) => {
-  const { theme, setTheme } = useContext(ThemeContext);
+  const { theme } = useContext(ThemeContext);
   const [arrowRotate, setArrowRotate] = useState("rotate(-90deg)");
 
   const styles = {
