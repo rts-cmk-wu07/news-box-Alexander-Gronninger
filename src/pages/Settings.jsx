@@ -4,6 +4,7 @@ import { css } from "@emotion/react";
 import { useContext } from "react";
 import CategoryContext from "../context/CategoryContext";
 import ThemeContext from "../context/ThemeContext";
+import DarkLightSwitch from "../components/DarkLightSwitch";
 
 const Settings = () => {
   const { theme, setTheme } = useContext(ThemeContext);
@@ -18,9 +19,9 @@ const Settings = () => {
 
   const styles = {
     settings: css`
+      padding-top: 40px;
       background-color: ${theme.primaryBackgroundColor};
       & h2 {
-        padding-top: 40px;
         color: ${theme.primaryTextColor};
       }
       & p {
@@ -49,6 +50,14 @@ const Settings = () => {
         }
       }
     `,
+    version: css`
+      color: ${theme.primaryTextColor};
+      font-size: 12px;
+      margin: 0 auto;
+      max-width: 125px;
+      margin-top: 31px;
+      padding-bottom: 30px;
+    `,
   };
 
   return (
@@ -69,6 +78,8 @@ const Settings = () => {
           );
         })}
       </section>
+      <DarkLightSwitch />
+      <p css={styles.version}>Version 420.blazing</p>
     </main>
   );
 };

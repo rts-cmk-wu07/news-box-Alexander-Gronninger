@@ -1,5 +1,6 @@
 import { useContext } from "react";
-import ThemeContext from "../context/ThemeContext"; /** @jsxImportSource @emotion/react */
+import ThemeContext from "../context/ThemeContext";
+/** @jsxImportSource @emotion/react */
 import { css } from "@emotion/react";
 import CategoryContext from "../context/CategoryContext";
 

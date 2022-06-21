@@ -21,6 +21,7 @@ function App() {
   ];
 
   const lightTheme = {
+    theme: "light",
     primaryColor: "#87BCBF",
     secondaryColor: "#D97D54",
     tertiaryColor: "#324755",
@@ -34,6 +35,7 @@ function App() {
   };
 
   const darkTheme = {
+    theme: "dark",
     primaryColor: "#bf8a87",
     secondaryColor: "#54b0d9",
     tertiaryColor: "#554032",
@@ -47,7 +49,7 @@ function App() {
   };
 
   const [categories, setCategories] = useState(categoryList);
-  const [theme, setTheme] = useState(darkTheme);
+  const [theme, setTheme] = useState(lightTheme);
 
   const styles = {
     app: css`
