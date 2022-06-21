@@ -1,6 +1,6 @@
 import "./App.css";
 import { Routes, Route } from "react-router-dom";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 import Nav from "./templates/Nav";
 import Home from "./pages/Home";
@@ -50,6 +50,11 @@ function App() {
 
   const [categories, setCategories] = useState(categoryList);
   const [theme, setTheme] = useState(lightTheme);
+
+  let savedTheme = JSON.parse(localStorage.getItem("theme")) || false;
+  useEffect(() => {
+    savedTheme && setTheme(savedTheme);
+  }, []);
 
   const styles = {
     app: css`

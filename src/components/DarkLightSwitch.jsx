@@ -28,12 +28,12 @@ const DarkLightSwitch = () => {
     <div
       css={styles.switch}
       onClick={() => {
-        console.log("theme switch clicked");
-        console.log(theme.theme);
         if (theme.theme === "light") {
           setTheme(darkTheme);
+          localStorage.setItem("theme", JSON.stringify(darkTheme));
         } else {
           setTheme(lightTheme);
+          localStorage.setItem("theme", JSON.stringify(lightTheme));
         }
       }}
     >

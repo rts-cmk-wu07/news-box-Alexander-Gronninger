@@ -88,9 +88,9 @@ const ArticleCategories = (props) => {
         </div>
       }
     >
-      {error && <p css={styles.error}>Couuldn't load content...</p>}
-      {error && <p css={styles.error}>Please try again in a minute...</p>}
-      {isPending && <p css={styles.error}>Loading...</p>}
+      {error && <p css={styles.errors}>Couuldn't load content...</p>}
+      {error && <p css={styles.errorss}>Please try again in a minute...</p>}
+      {isPending && <p css={styles.errors}>Loading...</p>}
       {data &&
         data.results.map((result) => {
           return (
