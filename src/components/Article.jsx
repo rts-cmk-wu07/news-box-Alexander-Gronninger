@@ -86,12 +86,40 @@ const Article = (props) => {
       } else if (e.deltaX > -100) {
         setSwipe(e.deltaX + "px");
       } else {
-        console.log("add archiving");
       }
     },
     onSwiped: (e) => {
       setSwipe("0px");
       setTransition("all 1s");
+      if (e.deltaX <= -100) {
+        let selectedArticle = {
+          category: props.category,
+          title: props.title,
+          link: props.link,
+          image: props.image,
+          paragraph: props.paragraph,
+        };
+
+        let savedArticles =
+          JSON.parse(localStorage.getItem("savedArticles")) || [];
+
+        let articleAlreadySaved = false;
+
+        savedArticles.map((article) => {
+          if (article.link == props.link) {
+            articleAlreadySaved = true;
+          }
+        });
+
+        let newSavedArticles = [];
+        if (articleAlreadySaved == true) {
+          newSavedArticles = [...savedArticles];
+        } else {
+          newSavedArticles = [selectedArticle, ...savedArticles];
+        }
+
+        localStorage.setItem("savedArticles", JSON.stringify(newSavedArticles));
+      }
     },
   });
 

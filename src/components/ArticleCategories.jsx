@@ -108,6 +108,7 @@ const ArticleCategories = (props) => {
                     "no paragraph available"
                   }
                   link={result.url && result.url}
+                  category={props.category}
                 />
               )}
             </>
