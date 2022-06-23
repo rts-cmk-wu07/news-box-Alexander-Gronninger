@@ -9,6 +9,8 @@ const ArchiveArticle = (props) => {
   const { theme, setTheme } = useContext(ThemeContext);
   const [swipe, setSwipe] = useState("0");
   const [transition, setTransition] = useState("all 0s");
+  const [isShowing, setIsShowing] = useState(true);
+  let savedArticles = JSON.parse(localStorage.getItem("savedArticles"));
 
   const styles = {
     container: css`
@@ -77,6 +79,7 @@ const ArchiveArticle = (props) => {
     `,
   };
 
+  let newSavedArticles = [];
   const handlers = useSwipeable({
     delta: 10,
     swipeDuration: 50000,
@@ -92,23 +95,35 @@ const ArchiveArticle = (props) => {
       setSwipe("0px");
       setTransition("all 1s");
       if (e.deltaX <= -100) {
+        setIsShowing(false);
+        savedArticles.map((article, index) => {
+          if (article.title !== props.title) {
+            newSavedArticles.push(article);
+          }
+        });
+        localStorage.setItem("savedArticles", JSON.stringify(newSavedArticles));
+        savedArticles = newSavedArticles;
       }
     },
   });
 
   return (
-    <div css={styles.container} {...handlers}>
-      <a href={props.link} css={styles.article}>
-        <article>
-          <img src={props.image} alt={props.imageName} />
-          <h2>{props.title}</h2>
-          <p>{props.paragraph}</p>
-        </article>
-      </a>
-      <div css={styles.button}>
-        <FaTrash />
-      </div>
-    </div>
+    <>
+      {isShowing && (
+        <div css={styles.container} {...handlers}>
+          <a href={props.link} css={styles.article}>
+            <article>
+              <img src={props.image} alt={props.imageName} />
+              <h2>{props.title}</h2>
+              <p>{props.paragraph}</p>
+            </article>
+          </a>
+          <div css={styles.button}>
+            <FaTrash />
+          </div>
+        </div>
+      )}
+    </>
   );
 };
 
