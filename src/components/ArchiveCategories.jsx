@@ -20,6 +20,10 @@ const ArchiveCategories = (props) => {
       height: 60px;
       border-bottom: 1px solid lightgray;
       background-color: ${theme.primaryBackgroundColor};
+      position: sticky;
+      width: 100%;
+      top: 0;
+      z-index: 5;
       & div {
         margin: 0 0 0 10px;
         border-radius: 50%;

@@ -9,7 +9,14 @@ import ThemeContext from "../context/ThemeContext";
 
 const Nav = () => {
   const { theme } = useContext(ThemeContext);
+
   const styles = {
+    header: css`
+      position: fixed;
+      width: 100%;
+      top: 0;
+      z-index: 10;
+    `,
     nav: css`
       display: flex;
       justify-content: space-between;
@@ -36,7 +43,7 @@ const Nav = () => {
   let pageURL = useLocation().pathname;
   return (
     <>
-      <header>
+      <header css={styles.header}>
         <nav css={styles.nav}>
           {(useLocation().pathname === "/" && <ArchiveIcon />) || <ArrowIcon />}
           <h1>
