@@ -4,6 +4,8 @@ import ThemeContext from "../context/ThemeContext";
 import { css } from "@emotion/react";
 import { GrInbox } from "react-icons/gr";
 import { useSwipeable } from "react-swipeable";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const Article = (props) => {
   const { theme, setTheme } = useContext(ThemeContext);
@@ -119,6 +121,16 @@ const Article = (props) => {
         }
 
         localStorage.setItem("savedArticles", JSON.stringify(newSavedArticles));
+
+        toast.info("Article saved to archive", {
+          position: "top-center",
+          autoClose: 2500,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        });
       }
     },
   });

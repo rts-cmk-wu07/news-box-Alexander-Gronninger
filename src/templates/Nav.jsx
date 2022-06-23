@@ -8,7 +8,7 @@ import { useContext } from "react";
 import ThemeContext from "../context/ThemeContext";
 
 const Nav = () => {
-  const { theme, setTheme } = useContext(ThemeContext);
+  const { theme } = useContext(ThemeContext);
   const styles = {
     nav: css`
       display: flex;

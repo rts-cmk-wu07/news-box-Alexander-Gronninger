@@ -10,6 +10,8 @@ import CategoryContext from "./context/CategoryContext";
 import ThemeContext from "./context/ThemeContext";
 /** @jsxImportSource @emotion/react */
 import { css } from "@emotion/react";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function App() {
   const categoryList = [
@@ -71,6 +73,17 @@ function App() {
 
   return (
     <div className="App" css={styles.app}>
+      <ToastContainer
+        position="top-center"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+      />
       <CategoryContext.Provider value={{ categories, setCategories }}>
         <ThemeContext.Provider
           value={{ theme, lightTheme, darkTheme, setTheme }}

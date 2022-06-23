@@ -4,9 +4,11 @@ import ThemeContext from "../context/ThemeContext";
 import { css } from "@emotion/react";
 import { FaTrash } from "react-icons/fa";
 import { useSwipeable } from "react-swipeable";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const ArchiveArticle = (props) => {
-  const { theme, setTheme } = useContext(ThemeContext);
+  const { theme } = useContext(ThemeContext);
   const [swipe, setSwipe] = useState("0");
   const [transition, setTransition] = useState("all 0s");
   const [isShowing, setIsShowing] = useState(true);
@@ -103,6 +105,15 @@ const ArchiveArticle = (props) => {
         });
         localStorage.setItem("savedArticles", JSON.stringify(newSavedArticles));
         savedArticles = newSavedArticles;
+        toast.info("Article removed from archive", {
+          position: "top-center",
+          autoClose: 2500,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        });
       }
     },
   });
